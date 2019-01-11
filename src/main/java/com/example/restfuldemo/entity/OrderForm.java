@@ -1,4 +1,4 @@
-package com.example.restfuldemo.Entity;
+package com.example.restfuldemo.entity;
 
 import javax.persistence.*;
 import java.util.Date;

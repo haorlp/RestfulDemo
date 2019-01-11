@@ -1,7 +1,7 @@
 package com.example.restfuldemo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.restfuldemo.Entity.OrderForm;
+import com.example.restfuldemo.entity.OrderForm;
 import com.example.restfuldemo.common.BaseResult;
 import com.example.restfuldemo.common.SuccessResp;
 import com.example.restfuldemo.repository.OrderRepository;
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.Optional;
 
 /**
  * @program: webbase
@@ -26,6 +25,7 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
+    //新增操作使用POST
     @RequestMapping(value = "",method = RequestMethod.POST)
     public BaseResult createOrder(@RequestBody OrderVo orderVo){
         BaseResult baseResult = null;
@@ -43,18 +43,21 @@ public class OrderController {
         return new SuccessResp(jsonObject);
     }
 
+    //查询操作使用GET
     @RequestMapping(value = "/{orderId}",method = RequestMethod.GET)
     public BaseResult getOrder(@PathVariable(value = "orderId") Integer orderId){
         OrderForm orderForm = orderRepository.getOrderForm(orderId);
         return new SuccessResp(orderForm);
     }
 
+    //删除使用DELETE
     @RequestMapping(value = "/{orderId}",method = RequestMethod.DELETE)
     public BaseResult deleteOrder(@PathVariable(value = "orderId") Integer orderId){
         orderRepository.deleteById(orderId);
         return new SuccessResp();
     }
 
+    //更新使用PATCH或者PUT
     @RequestMapping(value = "/{orderId}",method = RequestMethod.PATCH)
     public BaseResult putOrder(@PathVariable(value = "orderId") Integer orderId,String orderName){
         orderRepository.updateByOrderId(orderId,orderName);
