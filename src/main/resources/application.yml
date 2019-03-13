@@ -1,31 +1,3 @@
-server:
-  port: 8084
-  maxHttpHeaderSize: 0
 spring:
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/restful?characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
-    username: root
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-
-  jpa:
-    show-sql: true
-#    hibernate:
-#      ddl-auto: create
-  redis:
-    host: 127.0.0.1
-    password:
-    port: 6379
-    timeout: 3000
-#    pool:
-#      max-active: 8
-#      max-idle: 8
-#      max-wait: 5000
-activemq:
-  username: admin
-  password: admin
-  brokerUrl: tcp://127.0.0.1:61618
-  spring:
-    thymeleaf:
-      prefix: classpath:/templates
-      enabled: false
+  profiles:
+    active: ${spring.profile.active:dev}
